@@ -1,0 +1,197 @@
+<!doctype html>
+<html lang="en">
+{% load staticfiles %}
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="{% static 'css/bootstrap.min.v4.0.0.css' %}" >
+    <link rel="stylesheet" href="{% static 'css/fontawesome.v5.8.0.css' %}">
+    <script src="{% static 'js/jquery.slim.min.3.2.1.js' %}"></script>
+    <script src="{% static 'js/popper.min.1.12.9.js' %}"></script>
+    <script src="{% static 'js/bootstrap.min.4.0.js' %}"></script>
+    <script type="text/javascript" src="{% static 'js/jquery.min.js' %}"></script>
+    <style>
+        .search-box{
+			border-radius: 40px;
+			background: #95a5a6;
+			padding: 4px;
+			display: flex;
+			justify-content: center;
+			align-items: center;
+		}
+		.search-box form{
+			margin: auto;
+			width: 0;
+		}
+		.search-text{
+			border: none;
+			outline: none;
+			background: inherit;
+			color: #2c3e50;
+			text-align: center;
+			transition: 0.4s;
+			width: 0px;
+		}
+		.search-btn{
+			height: 30px;
+			width: 30px;
+			font-size: 17px;
+			border-radius: 50%;
+			background: inherit;
+			color: #2c2c54;
+			display: flex;
+			justify-content: center;
+			align-items: center;
+			text-decoration: none!important;
+			transition: 0.4s;
+		}
+        .search-form{display: none;}
+		.search-box:hover > .search-text{width: 100px;padding: 0 6px;}
+		.search-box:hover > .search-btn{background: #fff;}
+        main{min-height: 80vh}
+        canvas{
+            height: 100%;
+            width: 100%;
+            position: absolute;
+            top: 0;
+            left: 0;
+            z-index: -2;
+        }
+        .navbar{
+            padding: .25rem 1rem;
+        }
+        .font-have-massage{
+            position: absolute;
+            bottom: 0px;
+            left: 0px;
+            display: flex;
+            height: 6px;
+            width: 6px;
+            border-radius: 50% 50%;
+            background: red;
+        }
+    </style>
+    <title>{% block title %}base{% endblock %}</title>
+    {% block css_js %}
+    {% endblock %}
+    <script>
+        function logout() {
+            $("#logout").submit();
+        }
+        $(function () {
+            if ("WebSocket" in window) {
+                //如果返回True则表示支持，否则不支持
+                var ws = new WebSocket("ws://javafeng.com");
+                //链接打开时执行
+                ws.onopen = function(evt) {
+                    ws.send("success");
+                };
+                //接收到消息时执行
+                ws.onmessage = function(evt) {
+                    var received_msg = evt.data;
+
+                };
+                //链接关闭时执行
+                ws.onclose = function(evt) {
+
+                };
+
+            }
+        })
+    </script>
+</head>
+<body>
+    <header>
+        <div class="pos-f-t">
+            <div class="collapse" id="navbarToggleExternalContent">
+                <div class="bg-dark p-4">
+                    <div class = "container justify-content-between">
+                        <div class="row">
+                            <div class="col-md-4 mb-1">
+                                {% if request.user.is_authenticated %}
+                                    <a href="{% url 'user:info' request.user.id %}">
+                                        <h4 class="text-white">{{ request.user.username }}</h4>
+                                        <img class="img-thumbnail mt-3" src="{{request.user.headImage.url}}" alt="User" height="90" width="90">
+                                    </a>
+                                {% else %}
+                                    <h4 class="text-white">尚未登陆</h4>
+                                    <img class="img-thumbnail mt-3" src="{% static "image/default.jpg" %}" alt="User" height="90" width="90">
+                                {% endif %}
+                            </div>
+                            <div class="col-md-5 d-none d-md-block">
+                                <canvas></canvas>
+                            </div>
+                            {% if request.user.is_authenticated %}
+                            <div class="col-md-3 d-flex flex-column md-0 mt-2">
+                                <h4 class="text-white">Info</h4>
+                                <span class="text-muted">School: {{request.user.school}}</span>
+                                <span class="text-muted">Contest Rating: {{request.user.rating}}</span>
+                                <span class="text-muted">Registered: {{request.user.date_joined}}</span>
+                                <span class="text-muted">Email: {{request.user.email}}</span>
+                                <span class="text-muted">Last seen: {{request.user.last_login}}</span>
+                            </div>
+                            {% else %}
+                            <div class="col-md-3 d-flex flex-column md-0 mt-2">
+                            </div>
+                            {% endif %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <nav class="navbar navbar-dark bg-dark navbar-fixed-top">
+                <div class = "container d-flex flex-column flex-md-row align-items-center ">
+                    <button class="navbar-toggler collapsed my-2 my-md-0 mr-md-3" type="button" data-toggle="collapse" data-target="#navbarToggleExternalContent" aria-controls="navbarToggleExternalContent" aria-expanded="false" aria-label="Toggle navigation">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
+                    <div class="navbar-nav navbar my-2 my-md-0 mr-md-3" style="flex-direction:row;justify-content:space-around;">
+                        <a class="p-2 nav-link {% if request.path|slice:'2' == '/i'%}active{% endif %}" href="{% url 'user:index' %}">Home</a>
+                        <a class="p-2 nav-link {% if request.path|slice:'2' == '/c'%}active{% endif %}" href="{% url 'contest:match' %}">Contests</a>
+                        <a class="p-2 nav-link {% if request.path|slice:'11' == '/problem/pa' %}active{% endif %}" href="{% url 'problem:problem_page' 0 %}">Problem List</a>
+                        <a class="p-2 nav-link {% if request.path|slice:'11' == '/problem/pr'%}active{% endif %}" href="{% url 'problem:problem_status' %}">Status</a>
+                        <a class="p-2 nav-link {% if request.path|slice:'2' == '/ra'%}active{% endif %}" href="{% url 'user:user_rank' %}">Rank</a>
+                    </div>
+
+                    <div class = "row my-2 my-md-0 mr-md-6 align-items-center">
+                        <div style="cursor: pointer;position: relative;" class="mr-4">
+                            <i class="fas fa-bell text-white" style="line-height: 100%"></i>
+                            <span class="font-have-massage"></span>
+                        </div>
+                        {% if request.user.is_authenticated %}
+                            <div class="btn-group">
+                                <button type="button" class="text-white btn btn-outline-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    {{ request.user.username }}
+                                </button>
+                                <div class="dropdown-menu dropdown-menu-right" >
+                                    <a href="{% url 'user:info' request.user.id %}" style="text-decoration: none;"><button class="dropdown-item" type="button"><i class="fas fa-user-alt"></i> {{ request.user.username }}</button></a>
+                                    <!-- 去获取setting页面的时候 赋值为0 修改的时候再赋值为uid 好 还是写两个url 一个对应有参数，一个没参数好？？？ -->
+                                    <a href="{% url 'user:setting' %}"  style="text-decoration: none;"><button class="dropdown-item" type="button"><i class="fas fa-cog"></i> setting</button></a>
+                                    <a href="javascript:void(0);" onclick="logout()" style="text-decoration: none;"><button class="dropdown-item" type="button"><i class="fas fa-sign-out-alt"></i> sign out</button></a>
+                                </div>
+                            </div>
+                            <form action="{% url 'user:logout' %}" id="logout" method="post" class="hidden"></form>
+                        {% else %}
+                            <a href = "{% url 'user:login' %}"><button class = "btn btn-outline-success" type="button">Login</button></a>
+                            <a href="{% url 'user:register' %}"><button class = "btn btn-link text-info">SignUp</button></a>
+                        {% endif %}
+                    </div>
+                </div>
+            </nav>
+        </div>
+    </header>
+    <main class = "container-fluid pt-1">
+        {% block content %}
+        {% endblock %}
+    </main>
+    <footer class=" text-muted py-3 my-3">
+      <div class="container text-center">
+      <div style="font-size:12px;">
+        <p style="padding:1px">Guizhou University Online Judge<br />
+        © Copyright 2018-2019 - <a href="../../">贵州大学计算机科学与技术学院</a>. All Rights Reserved. <br />
+        Design & Develop：<a href="../../getting-started/">贵州大学ACM实验室</a></p>
+    </div>
+      </div>
+    </footer>
+   </body>
+</html>

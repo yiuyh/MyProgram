@@ -1,0 +1,155 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="105d8eda-d3f9-4819-83ec-f2d5fb54c518" name="默认的" comment="" />
+    <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="DatabaseView">
+    <option name="SHOW_INTERMEDIATE" value="true" />
+    <option name="GROUP_DATA_SOURCES" value="true" />
+    <option name="GROUP_SCHEMA" value="true" />
+    <option name="GROUP_CONTENTS" value="true" />
+    <option name="SORT_POSITIONED" value="true" />
+    <option name="SHOW_EMPTY_GROUPS" value="true" />
+    <option name="AUTO_SCROLL_FROM_SOURCE" value="true" />
+    <option name="HIDDEN_KINDS">
+      <set />
+    </option>
+    <expand>
+      <path>
+        <item name="数据库" type="3277223f:DatabaseStructure$DbRootGroup" />
+        <item name="@localhost" type="feb32156:DbDataSourceImpl" />
+      </path>
+      <path>
+        <item name="数据库" type="3277223f:DatabaseStructure$DbRootGroup" />
+        <item name="@localhost" type="feb32156:DbDataSourceImpl" />
+        <item name="schemas" type="d4e8921:DatabaseStructure$FamilyGroup" />
+      </path>
+      <path>
+        <item name="数据库" type="3277223f:DatabaseStructure$DbRootGroup" />
+        <item name="@localhost" type="feb32156:DbDataSourceImpl" />
+        <item name="schemas" type="d4e8921:DatabaseStructure$FamilyGroup" />
+        <item name="information_schema: schema" type="76f4a085:MysqlImplModel$Schema" />
+      </path>
+    </expand>
+    <select />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="HTML File" />
+        <option value="Python Script" />
+      </list>
+    </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
+  </component>
+  <component name="ProjectId" id="1OXKY6vkm8EYhbYtOrOp5zfOZXQ" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="PropertiesComponent">
+    <property name="DatabaseDriversLRU" value="mysql" />
+    <property name="DefaultHtmlFileTemplate" value="HTML File" />
+    <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
+    <property name="TODO_SCOPE" value="All Places" />
+    <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="database.console.LAST_STATE" value="false" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../../git/OJ" />
+    <property name="settings.editor.selected.configurable" value="project.propVCSSupport.Mappings" />
+    <property name="two.files.diff.last.used.file" value="$PROJECT_DIR$/UserProfile/templates/register.html" />
+  </component>
+  <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\Administrator\Desktop\Online-Judge-master\OnlineJudge\apps\Contest" />
+      <recent name="C:\Users\DELL\Desktop\问困境\OnlineJudge\static\js\code-editing" />
+      <recent name="C:\Users\DELL\Desktop\问困境\OnlineJudge\static\js" />
+      <recent name="C:\Users\DELL\Desktop\问困境\OnlineJudge\UserProfile\templates" />
+      <recent name="E:\Online-Judge\Online-Judge\web\OnlineJudge\templates" />
+    </key>
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/Contest/templates" />
+      <recent name="D:\ws\Online-Judge\OnlineJudge\static\image" />
+      <recent name="C:\Users\DELL\Desktop\问困境\OnlineJudge\static\js" />
+      <recent name="C:\Users\DELL\Desktop\问困境\OnlineJudge\Contest\templates" />
+      <recent name="E:\Online-Judge\Online-Judge\web\OnlineJudge\UserProfile\templates" />
+    </key>
+  </component>
+  <component name="RunDashboard">
+    <option name="ruleStates">
+      <list>
+        <RuleState>
+          <option name="name" value="ConfigurationTypeDashboardGroupingRule" />
+        </RuleState>
+        <RuleState>
+          <option name="name" value="StatusDashboardGroupingRule" />
+        </RuleState>
+      </list>
+    </option>
+  </component>
+  <component name="SvnConfiguration">
+    <configuration />
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="105d8eda-d3f9-4819-83ec-f2d5fb54c518" name="默认的" comment="" />
+      <created>1542703411186</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1542703411186</updated>
+      <workItem from="1543844175122" duration="6000" />
+      <workItem from="1553388797889" duration="11517000" />
+      <workItem from="1553405131955" duration="374000" />
+      <workItem from="1554807643490" duration="11129000" />
+      <workItem from="1554898969226" duration="12353000" />
+      <workItem from="1554973113975" duration="161000" />
+      <workItem from="1554978777038" duration="12358000" />
+      <workItem from="1555054478653" duration="13743000" />
+      <workItem from="1555072765304" duration="4987000" />
+      <workItem from="1555081301872" duration="6860000" />
+      <workItem from="1555122456774" duration="24142000" />
+      <workItem from="1556893682317" duration="5676000" />
+      <workItem from="1556936191143" duration="4723000" />
+      <workItem from="1557493602518" duration="13786000" />
+      <workItem from="1557544641572" duration="24058000" />
+      <workItem from="1557574144291" duration="151000" />
+      <workItem from="1558014442314" duration="13512000" />
+      <workItem from="1558061069160" duration="2703000" />
+      <workItem from="1558080913956" duration="6777000" />
+      <workItem from="1558098911126" duration="3448000" />
+      <workItem from="1558108922127" duration="5776000" />
+      <workItem from="1558151218550" duration="29986000" />
+      <workItem from="1558354079542" duration="1651000" />
+      <workItem from="1558496406979" duration="6887000" />
+      <workItem from="1559035525142" duration="31638000" />
+      <workItem from="1559395387867" duration="1118000" />
+      <workItem from="1559465894788" duration="8943000" />
+      <workItem from="1559889402246" duration="19000" />
+      <workItem from="1560262655212" duration="941000" />
+      <workItem from="1561258730477" duration="3754000" />
+      <workItem from="1561280306968" duration="263000" />
+      <workItem from="1564118551727" duration="17778000" />
+      <workItem from="1564239638846" duration="4965000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="1" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State>
+              <option name="COLUMN_ORDER" />
+            </State>
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
+</project>

@@ -1,0 +1,248 @@
+{% extends 'base.html' %}
+{% load staticfiles %}
+{% block title %}
+    {{ no }} - {{ problem.title }}
+{% endblock %}
+{% load staticfiles %}
+{% block css_js %}
+	<link href = "{% static 'css/base16-dark.css' %}" rel = "stylesheet">
+	<link href = "{% static 'css/codemirror.css' %}" rel = "stylesheet">
+	<script src="{% static 'js/code-editing/codemirror.js' %}"></script>
+	<script src="{% static 'js/code-editing/clike.js' %}"></script>
+	<script src="{% static 'js/code-editing/python.js' %}"></script>
+	<style>
+		p{
+			font-size: 14px;
+			font-weight: 500;
+		}
+		pre{
+			font-family: "Adobe 仿宋 Std R";
+			font-size: 13px;
+			font-weight: 500;
+			margin: auto;
+		}
+		article{
+			margin-left: 0.75em;
+		}
+		h5{
+			padding: 0.6em;
+			border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+		}
+		h6{
+			margin-left: 0.8em;
+			color: #515151;
+		}
+		.bttom-border{
+			border-bottom: 1px solid rgba(200, 200, 100, 0.1);
+		}
+		.up-btn{
+			height:12px;width:100%;background:#3d444c;text-align:center;
+		}
+		.up-btn .fas{color: #fff;font-size: 18px;background: #232c31;padding: 2px 8px 0 8px;line-height: 12px;vertical-align:top;display: inline-block;}
+ 		.up-btn .fas:hover{color:#08c;cursor:pointer;}
+		.stu-box{
+			width: 100%;
+			height: 0;
+			transition: 0.4s;
+			background: #3d444c;
+			margin-top: 0.1em;
+		}
+	</style>
+<script type="text/javascript" src="{% static 'js/jquery.min.js' %}"></script>
+{% endblock %}
+
+{% block content %}
+<div class = "container-fluid">
+	<div class="row mt-5 mt-2 justify-content-center">
+		<div class = "col-lg-6 mb-2 bg-white">
+			<div class=" p-md-3"style="height: 87vh;overflow: auto;min-height: 600px;">
+				<h1 class="mx-auto">{{ no }} - {{ problem.title }}</h1>
+				<h5 class = "font-weight-bold">题目描述</h5>
+                <div class="bg-light p-2 px-3">
+                    <span style="font-weight: 500;font-size: small"> Time Limit: {{ problem.time }} ms</span><br>
+                    <span style="font-weight: 500;font-size: small">Memory Limit: {{ problem.memory }} mb</span>
+                </div>
+				<pre class = "bg-light text-justify p-3 mt-2">{{problem.content}}</pre>
+				<h5 class = "font-weight-bold">输入输出格式</h5>
+				<div class = "Problem-content">
+					<h6 class = "font-weight-bold">输入格式:</h6>
+					<article class="my-3">
+						<pre>{{problem.InputFormat}}</pre>
+					</article>
+				</div>
+				<div class = "Problem-content">
+					<h6 class = "font-weight-bold">输出格式:</h6>
+					<article class="my-3">
+						<pre>{{problem.OutputFormat}}</pre>
+					</article>
+				</div>
+				<h5 class = "font-weight-bold">输入输出样例</h5>
+				<div class = "row">
+					<div class = "col-md-6">
+						<h6 class = "font-weight-bold">输入样例#:</h6>
+						<div class="p-2 bg-light mx-2 rounded mb-1">
+							<pre>{{problem.sampleInput}}</pre>
+						</div>
+					</div>
+					<div class = "col-md-6">
+						<h6 class = "font-weight-bold">输出样例#:</h6>
+						<div class="p-2 bg-light mx-2 rounded mb-1">
+							<pre>{{problem.sampleOutput}}</pre>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class = "col-lg-5 p-3 bg-dark rounded" style="height: 87vh;">
+			<form class="d-flex flex-column " method="post" action="" style="height: 100%;width: 100%;">
+				{% csrf_token %}
+				<div class = "mb-2 bttom-border pb-2" >
+					<div class="dropdown col-lg-2 col-md-2 d-inline-block">
+						<div class="dropdown">
+							<a class="btn btn-secondary dropdown-toggle text-white bg-info" id="select_language" href="#"
+							   data-toggle="dropdown">
+							</a>
+							<div class="dropdown-menu select_show" aria-labelledby="dropdownMenuLink">
+								<a class="dropdown-item" href="#" id = "csrc" name="C">C</a>
+								<a class="dropdown-item" href="#" id="c++src" name="C++">C++</a>
+								<a class="dropdown-item" href="#" id="java" name="Java">Java</a>
+<!--								<a class="dropdown-item" href="#" id="python" name="Python">Python</a>-->
+							</div>
+						</div>
+					</div>
+					<div class = "col-lg-3 col-md-4 text-info pt-1 reset-btn d-inline-block" style="cursor: pointer;">
+						<i class="fab fa-rev"></i> 重置
+					</div>
+					<div class = "col-lg-3 col-md-4 text-info pt-1 pull-right float-right d-inline-block" style="cursor: pointer;">
+						<a href="{% url 'contest:contest_content' contest_id %}#Status"
+						   style="display: block; height: 100%;width: 100%;text-decoration: none;font-size: 19px;" class="text-info">
+							<i class="fas fa-home"></i> 比赛主页</a>
+					</div>
+				</div>
+				<div class = "row" style="flex: 1;overflow: auto;">
+                    <pre style="display: none;" id="last_code">{{ code }}</pre>
+					<div class = "editing-box" style="height: 100%;width: 100%;">
+						<textarea id="texteara" name="editor"></textarea>
+					</div>
+				</div>
+				<div class = "row">
+					<div class = "up-btn"><i class="fas fa-angle-up"></i></div>
+					<input type="text" class="d-none">
+					<button type = "submit" class = "mx-2 mt-3 btn btn-primary col-lg-4 col-md-6 col-sm-8"
+							id = "codeSubmit">submit</button>
+					<div class = "stu-box mx-1" style="overflow: auto;">
+						<article class="py-4 pl-3" id = 'submit_info'>
+							<p class="text-info">提交代码后在此处可查看状态</p>
+						</article>
+					</div>
+				</div>
+			</form>
+			<script>
+
+				//获取代码编辑框，并用codemirror代替textarea
+                var myTextarea = $("#texteara")[0];
+                var editor = CodeMirror.fromTextArea(myTextarea, {//codemirror参数设置
+                    lineNumbers: true,
+                    mode:"text/x-c++src",
+                    indentUnit: 4,
+                    theme:"base16-dark",
+                    indentWithTabs: true,
+                    matchBrackets: true,
+                    styleActiveLine: true,
+                });
+                editor.setSize("100%" , "100%");//codemirror宽高设置
+                editor.setValue($('#last_code').text());
+                $(".reset-btn").click(function(){
+                    editor.setValue("");//codemirror 内容重置
+                });
+
+
+                $(".dropdown-menu a").click(function(){
+					editor.setOption("mode" , "text/x-" + $(this).attr('id'));//codemirror 语言选择
+					$("#select_language").text($(this).text());
+				});
+				$(".dropdown-menu a[name='{{ language }}']").click();
+
+
+                var up_btn = $(".up-btn");// 获取提交状态显示按钮
+                var flag = 1;//flag = 1 表示提交状态栏为隐藏
+                up_btn.click(function(){// 给显示按钮加点击事件，让状态栏显示或隐藏
+                    if (flag){
+                        $(".stu-box").css('height', '200px');
+                        $(this).children().removeClass('fa-angle-up').addClass('fa-angle-down');
+                        flag = 0;
+                    }
+                    else{
+                        $(".stu-box").css('height', '0px');
+                        $(this).children().removeClass('fa-angle-down').addClass('fa-angle-up');
+                        flag = 1;
+                    }
+                });
+
+                //给提交代码按钮添加ajax事件
+				var result = ['', 'Accepted', 'Presentation Error', 'Wrong Answer', 'Time Limit Exceeded', 'Memory Limit Exceeded',
+					'Output Limit Exceeded', 'Runtime Error', 'Compilation Error', 'Compile Output Limit'];
+				var result_color = ['orange', 'green', 'orange', 'red', 'purple', 'purple', 'purple', 'orange',
+					'orange', 'orange', 'orange'];
+				var er_info=['Please be patient.', 'Congratulations！ Your code <b>accepted</b> the question.',
+						'Your <b>output format</b> doesn\'t fit the question.',
+						'Your <b>code</b> doesn\'t fit the question.',
+						'Your <b>use time</b> doesn\'t fit the question.',
+						'Your <b>use Memory</b> doesn\'t fit the question.',
+						'Your <b>output</b> is too many.',
+						'There was an error in your <b>code</b> at run time.',
+						'There was an error in your <b>code</b> when it was compiled.',''
+				]
+				var last_code = "";
+				var last_language = $('#select_language').text();
+                $('#codeSubmit').click(function () {
+                    var code = editor.getValue();
+                     var language = $('#select_language').text();
+                    $.ajax({
+                        type: 'post',
+                        url: '{% url "contest:submit_status" %}',
+                        dataType: 'json',
+                        data: {
+                            'language': language,
+                            'editor': code,
+                            'prob_no': {{ problem.no }},
+							'contest_id': {{ contest_id }},
+                		},
+						beforeSend: function(arg){
+							flag = 1;
+							up_btn.click();
+							if(code != ''){
+								if(last_code === code && last_language == language) {
+									$('.stu-box #submit_info').html('<p class="text-danger">Unable to submit same code!</p>');
+									return false;
+								}
+								last_code = code;
+								last_language = language;
+								$('.stu-box #submit_info').html('<p class="text-info">submitting...</p>');
+							}
+							else{
+								$('.stu-box #submit_info').html('<p class="text-danger">Unable to submit empty code!</p>');
+								return false;
+							}
+						},
+						success: function(ret) {
+                        	if(ret.Error) $('.stu-box #submit_info').html("<p class='text-white'>" + ret.Error.result + "</p>");
+							else {
+								var _result = "<p style='font-size:18px;color: "+result_color[ret.Success.result]+";'>" +
+										result[ret.Success.result] + "</p>";
+									_result += "<p class='text-info'>" + er_info[ret.Success.result] + "</p>"
+								$('.stu-box #submit_info').html(_result);
+							}
+						},
+						error: function(err) {
+                        	$('.stu-box #submit_info').html("<p class='text-white'>发现未知错误，请联系我们解决问题</p>");
+							console.log('error');
+						}
+             	   	});
+                    return false;
+                });
+			</script>
+		</div>
+	</div>
+</div>
+{% endblock %}

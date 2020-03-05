@@ -1,0 +1,143 @@
+{% extends "base.html" %}
+
+{% block title %}
+    Rank
+{% endblock %}
+
+{% block css_js %}
+    <style>
+         .box_shadow{box-shadow: 0px 1px 4px 1px #888;background:#fff;}
+        .input-group{min-width: 240px;}
+        .table-content{
+          word-wrap:break-word;
+          table-layout:fixed;
+        }
+        .table-content td,th{
+            vertical-align: middle!important;
+         }
+    </style>
+{% endblock %}
+
+{% block content %}
+    <div class = "container">
+        <div class = "row my-3 bg-white p-3 box_shadow rounded">
+            <div class="input-group mb-2 col-3">
+                <input type="text" class="form-control" id="find_user_input" placeholder="昵称">
+                <div class="input-group-prepend" id="find_user_submit_btn" style="cursor: pointer;">
+                    <div class="input-group-text"><i class="fas fa-search"></i></div>
+                </div>
+                <script>
+                    $('#find_user_submit_btn').click(function(){
+                        var txt = $('#find_user_input').val();
+                        submit_query_criteria_status(1, txt);
+                    });
+                    $('#find_user_input').keypress(function (e) {
+                        if(e.which == 13){
+                            var txt = $('#find_user_input').val();
+                            submit_query_criteria_status(1, txt);
+                        }
+                    });
+                </script>
+            </div>
+            <table class = "table table-striped my-3 table-content table-striped table-bordered">
+                <thead>
+                <tr><th scope="col">#</th>
+                    <th scope="col">User</th>
+                    <th scope="col">School</th>
+                    <th scope="col">
+                        <div class="d-flex flex-column">
+                            <span>Rating</span>
+                            <span><i class="fas fa-sort-amount-down"></i></span>
+                        </div>
+                    </th>
+                    <th scope="col"><div class="d-flex flex-column">
+                            <span>Accept</span>
+                            <span><i class="fas fa-sort-amount-down"></i></span>
+                        </div></th></tr>
+                </thead>
+                <tbody>
+                {% for uu in userrank %}
+                <tr><td scope="row" class="user_rank"></td><td><a href="{% url 'user:info' uu.id %}">{{uu.username}}</a></td><td>{{uu.school}}</td><td>{{uu.rating}}</td><td>{{uu.ac_nums}}</td></tr>
+                {% endfor %}
+                </tbody>
+                <script>
+                    $(function(){
+                        var now_page = {{ now_page }} - 1;
+                        var oTh = $('.user_rank');
+                        for(var i = now_page*20;i < oTh.length + now_page*20;i++){
+                            console.log(i);
+                            $(oTh[i - now_page*20]).html(i + 1 + '');
+                        }
+                    });
+                </script>
+            </table>
+        </div>
+        {% if userrank.paginator.num_pages > 1 %}
+        <ul class="pagination justify-content-center mb-5">
+            {% if not userrank.has_previous %}
+            <li class="page-item disabled">
+                <a class="page-link" href="" aria-label="Previous">
+                    <span aria-hidden="true">&laquo;</span>
+                    <span class="sr-only">Previous</span>
+                </a>
+            </li>
+            {% else%}
+            <li class="page-item">
+                <a class="page-link page-previous" href="#" aria-label="Previous">
+                    <span aria-hidden="true">&laquo;</span>
+                    <span class="sr-only">Previous</span>
+                </a>
+                <script>
+                    $('.page-previous').click(function(){
+                        submit_query_criteria_status(0, {{ userrank.previous_page_number }});
+                    });
+                </script>
+            </li>
+            {% endif %}
+            {% for page_num in userrank.paginator.page_range %}
+            <li class="page-item page-num"><a class="page-link">{{ page_num }}</a></li>
+            {% endfor %}
+            <script>
+                $('.page-num').click(function(){
+                    submit_query_criteria_status(0, $(this).index('.page-num') + 1);
+                });
+                $($('.page-num')[{{ now_page }} - 1]).addClass('active');
+            </script>
+            {% if not userrank.has_next %}
+            <li class="page-item disabled">
+                <a class="page-link" href="#" aria-label="Next">
+                    <span aria-hidden="true">&raquo;</span>
+                    <span class="sr-only">Next</span>
+                </a>
+            </li>
+            {% else %}
+            <li class="page-item">
+                <a class="page-link page-next" href="#" aria-label="Next">
+                    <span aria-hidden="true">&raquo;</span>
+                    <span class="sr-only">Next</span>
+                </a>
+                <script>
+                    $('.page-next').click(function(){
+                        submit_query_criteria_status(0, {{ userrank.next_page_number }});
+                    });
+                </script>
+            </li>
+
+            {% endif %}
+        </ul>
+        {% endif %}
+    </div>
+<a href="" id="status_submit"></a>
+<script>
+    function submit_query_criteria_status(num , value){
+        var query_criteria = ['1','{{ submit_user_name }}'];
+        if(num == 0) query_criteria[0] = value.toString();
+        else query_criteria[num] = value.toString();
+        var _url = "?page=" + query_criteria[0] + "&" +
+            "submit_user_name=" + query_criteria[1];
+        var b = $('#status_submit');
+        b.attr('href', _url);
+        b[0].click();
+    }
+</script>
+{% endblock %}

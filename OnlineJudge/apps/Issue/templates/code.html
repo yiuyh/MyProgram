@@ -1,0 +1,60 @@
+{% extends 'base.html' %}
+
+{% block title %}
+    Code
+{% endblock %}
+
+
+{% block css_js %}
+<style>
+    .bottoum-border{
+        border-bottom: 1px solid gray;
+        padding-bottom: 0.8em;
+        margin-bottom: 0.8em;
+    }
+    blockquote pre{
+        border-left:3px solid #27ae60;
+        padding-left: 1em;
+    }
+</style>
+{% endblock %}
+
+
+{% block content %}
+
+<div class="container">
+    <div class="container my-3 py-3 bg-white round">
+        <h4 class="font-weight-bolder bottoum-border">{{submit.userName}}</h4>
+        <h5 class="d-inline">Status : </h5>
+            {% if '0' == submit.result %}
+                <span style = "text-align: center; color:orange">Queueing</span>
+                    {% elif '1' == submit.result %}
+                <span style = "text-align: center;color:green">Accepted</span>
+                    {% elif '2' == submit.result %}
+                <span style = "text-align: center; color:orange">Presentation Error</span>
+                    {% elif '3' == submit.result %}
+                <span style = "text-align: center;color:red">Wrong Answer</span>
+                    {% elif '4' == submit.result %}
+                <span style = "text-align: center; color:purple">Time Limit Exceeded</span>
+                    {% elif '5' == submit.result %}
+                <span style = "text-align: center;color:purple">Memory Limit Exceeded</span>
+                    {% elif '6' == submit.result %}
+                <span style = "text-align: center; color:purple">Output Limit Exceeded</span>
+                    {% elif '7' == submit.result %}
+                <span style = "text-align: center;color:orange">Runtime Error</span>
+                    {% elif '8' == submit.result %}
+                <span style = "text-align: center; color:orange">Compilation Error</span>
+                    {% else%}
+                <span style = "text-align: center;color:purple">Compile Output Limit</span>
+                    {% endif %}
+        <div>
+            <div><span>submit Time</span> : {{submit.subTime}} </div>
+            <div><span>language</span> : {{submit.language}} </div>
+        </div>
+        <h4 class="bottoum-border"></h4>
+        <blockquote>
+        <pre class="bg-light">{{submit.content}}</pre>
+        </blockquote>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+
+{% block title %}
+    count
+{% endblock %}
+
+{% block css_js %}
+{% endblock %}
+
+{% block content %}
+    <header></header>
+    <section>
+        <div class="container">
+            <table class = "table table-striped my-3 table-content">
+                <thead class="thead-light">
+                <tr><th scope="col">#</th>
+                    <th scope="col">User</th>
+                    <th scope="col">School</th>
+                    <th scope="col">Rating</th>
+                </tr>
+                </thead>
+                <tbody>
+                {% for i_user in sort_list %}
+                <tr><td scope="row">{{ forloop.counter }}</td><td><a href="{% url 'user:info' i_user.id %}">{{i_user.username}}</a></td><td>{{i_user.school}}</td><td>{{i_user.rating}}</td></tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </section>
+
+{% endblock %}

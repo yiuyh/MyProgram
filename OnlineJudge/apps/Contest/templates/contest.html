@@ -1,0 +1,643 @@
+{% extends "base.html" %}
+{% load staticfiles %}
+{% load my_filter %}
+{% block title %}
+	{{contest_name}}
+{% endblock %}
+{% block css_js %}
+<style>
+    .table th , td{
+        text-align: center;
+        vertical-align: middle!important;
+        font-size:15px;
+		white-space:nowrap;
+		text-overflow:ellipsis;
+		-o-text-overflow:ellipsis;
+		-moz-text-overflow: ellipsis;
+		-webkit-text-overflow: ellipsis;
+    }
+    .Unlink-error{
+        display: flex;
+        width: 100%;
+        justify-content: center;
+        flex-direction: column;
+        align-items: center;
+    }
+    .Waiting{
+       animation: waiting 2s infinite linear;
+        margin: 1em;
+        height: 80px;
+        width: 80px;
+    }
+    @keyframes waiting {
+        form{transform: rotate(0deg);}
+        to{transform: rotate(360deg);}
+    }
+	ul#countdown{
+		width: 100%;
+		height: 100%;
+		text-align:center;
+		padding-inline-start: 0px;
+	}
+	ul#countdown li {
+		color: rgb(141, 141, 140);
+		display: inline-block;
+		width: 85px;
+		height: 85px;
+		text-align: center;
+		padding: 12px;
+		border: 1px solid #4E2C20;
+		border-radius: 70px;
+	}
+	ul#countdown li span {
+		font-size: 24px;
+		color: #4E2C20;
+	}
+	ul#countdown li p.timeRefDays,
+	ul#countdown li p.timeRefHours,
+	ul#countdown li p.timeRefMinutes,
+	ul#countdown li p.timeRefSeconds {
+		color: #4E2C20;
+		font-size: 17px;
+		font-weight: 100;
+	}
+</style>
+
+<script type="text/javascript" src="{% static 'js/jquery.min.js' %}"></script>
+<script>
+	var rank_status_timer, show_table, last_table; /* 定义自动刷性定时器 */
+    var _query_condition = ["?page=", "&submit_user_name=", "&judge_states=", "&language=", "&problem_id="];
+    var last_query_condition = [];
+    var result = ['Queueing', 'Accepted', 'Presentation Error', 'Wrong Answer', 'Time Limit Exceeded', 'Memory Limit Exceeded',
+        'Output Limit Exceeded', 'Runtime Error', 'Compilation Error', 'Compile Output Limit', 'Compiling'];
+    var result_color = ['orange', 'green', 'orange', 'red', 'purple', 'purple', 'purple', 'orange',
+        'orange', 'orange', 'orange'];
+    var _url = [
+        "#Info",
+        "{% url 'contest:contestProblems' contest_id %}#Problem",
+        "{% url 'contest:contestRank' contest_id %}#Rank",
+        "{% url 'contest:contestStatus' contest_id %}"
+    ];/*设置查询指向地址*/
+    function creat_query_critera(index, value){
+    	clearInterval(rank_status_timer);
+        var query_condition = "";
+        if(index != 0)last_query_condition[0] = 1;
+        for(var i = 0;i < _query_condition.length;i++){
+            query_condition += _query_condition[i];
+            if(i == index && index != 0){
+                query_condition += value;
+            }
+            else if(index == 0 && i == index){
+                query_condition += value;
+            }
+            else query_condition += last_query_condition[i];
+        }
+        submit_query_criteria_status($('.table')[2], query_condition, _url[3], 3);
+    }
+    function time_penalty(useTime){
+        var seconds = Math.floor(useTime);
+        var hours = Math.floor(seconds / (60 * 60));
+        seconds -= hours * 60 * 60;
+        hours = hours < 10 ? ('0' + hours) : hours;
+        var minutes = Math.floor(seconds / 60);
+        seconds -= minutes * 60;
+        minutes = minutes < 10 ? ('0' + minutes) : minutes;
+        seconds = seconds < 10 ? ('0' + seconds) : seconds;
+        return ''+hours+':'+minutes+':'+seconds
+    }
+    var contest_Farr = [
+        /* 填充比赛说明 */
+        function(goal, ret){
+            return false;
+        },
+        /* 填充比赛题目信息 */
+        function(goal, ret){
+            ret = ret.Success;
+            goal = goal.children('tr');/*将所有行查出来*/
+            var RatioList = goal.children('.Problems_Ratio');/*在每一行中获取通过率那一列*/
+            var StatusList = goal.children('.Problems_Status');/*在每一行中获取提交状态那一列*/
+            for(var i = 0;i < goal.length;i++){
+                /*
+                * 循环填充数据
+                * */
+                var num = parseFloat(ret.ratio_list[i]);
+                $(RatioList[i]).html(num.toFixed(1)+"% ("+ret.ac_nums[i]+"/"+ret.submit_nums[i]+")");
+                $(StatusList[i]).html(ret.ac_list[i]);
+            }
+        },
+        /* 填充比赛排名 */
+        function(goal, ret){
+
+            var RankList = ret.Success.rankList;
+            if(RankList.length <= 0)
+            	setTimeout("submit_query_criteria_status($('.table')[1], '', _url[2], 2)", 3000);
+            else{
+				$(goal).html("");
+				goal = goal[0];
+
+				for (var i = 0; i < RankList.length; i++) {
+					/*循环填充数据*/
+					var oTd = "<tr>" +
+							"<th scope='row'>" + (i + 1) + "</th>" +
+							"<td>" + RankList[i].userName + "</td>" +
+							"<td>" + RankList[i].nickname + "</td>" +
+							"<td>" + RankList[i].score + "</td>" +
+							"<td>" + time_penalty(RankList[i].sort_time) + "</td>";
+					var Result_list = RankList[i].result_list;
+					/*以上为创建Rank表用户信息部分*/
+					for (var j = 0; j < Result_list.length; j++) {
+						if (Result_list[j][0]) {
+							oTd += "<td style='background: #a9f5af;'>" +
+									time_penalty(Result_list[j][2]) + " (-" + Result_list[j][1] + ")</td>";
+						} else if (Result_list[j][1]) {
+							oTd += "<td style='background: #fdd;'>" +
+									"(-" + Result_list[j][1] + ")</td>";
+						} else {
+							oTd += "<td></td>";
+						}
+						/*循环创建对于每个题目的提交状态*/
+					}
+					oTd += "</tr>";/*添加表格每一行的结尾*/
+					$(goal).append(oTd);/*添加到表格最下面一行，此处的数据是排好序之后按顺序传送过来的*/
+
+				}
+			}
+            // $('td[data-wrong]').hover(function(){
+            // 	$(this).text(''+$(this).attr('data-wrong'));
+            // }, function () {
+            // 	$(this).text(''+$(this).attr('data-use'));
+            // });
+        },
+        /* 填充比赛提交记录 */
+        function(goal, ret){
+            goal = goal[0];
+            $(goal).html("");
+            var statusList = ret.Success.statusList;
+            for(var i = 0;i < statusList.length;i++){
+                var oTd = "<tr>" +
+                    "<th>"+statusList[i].runID+"</th>" +
+                    "<td><a target='_blank' href='/contest/"+statusList[i].contest_id+"/"+statusList[i].probID+"/?Problem="+statusList[i].probName+"'>"+
+                    statusList[i].probName+"</a></td>" +
+                    "<td style='color:"+result_color[parseInt(statusList[i].result)]+"' >" + result[parseInt(statusList[i].result)]+"</td>" +
+                    "<td>"+statusList[i].time+" ms</td>" +
+                    "<td>"+statusList[i].memory+" kb</td>" +
+                    "<td><a href='/contest/{{contest_id}}/code/"+statusList[i].runID+"/'>"+statusList[i].language+"</a></td>" +
+                    "<td>"+statusList[i].subTime+"</td>" +
+                    "<td><a href='/info/"+statusList[i].uid+"/'>"+statusList[i].userName+"</a></td>" +
+                    "</tr>";
+                $(goal).append(oTd);
+            }
+
+            // ["?page=", "&submit_user_name=", "&judge_states=", "&language=", "&problem_id="]
+            last_query_condition[0] = parseInt(ret.Success.now_page);
+            last_query_condition[1] = ret.Success.submit_user_name;
+            last_query_condition[2] = ret.Success.judge_states;
+            last_query_condition[3] = ret.Success.language;
+            last_query_condition[4] = ret.Success.problem_id;
+            var oStatus = $('.status');
+            oStatus.children('ul').remove();
+            var pagination = "<ul class='pagination justify-content-center my-2'>";
+            if(last_query_condition[0] == 1)
+                pagination += "<li class='page-item disabled'>";
+            else
+                pagination += "<li class='page-item'>";
+            pagination += "<a class='page-link page-previous' href='javascript:creat_query_critera(0,"+(last_query_condition[0]-1)+
+                ")' aria-label='Previous'> " +
+                "<span aria-hidden='true'>&laquo;</span>" +
+                "<span class='sr-only'>Previous</span>" +
+                "</a> " +
+                "</li> ";
+            var t = parseInt(ret.Success.now_page);
+            for(var i = t - 5;i <= t + 5;i++){
+                if(i < 1 || i > parseInt(ret.Success.page_num))continue;
+                pagination += "<li class='page-item page-num"+(i==last_query_condition[0] ? " active" : "")+"'>" +
+                    "<a class='page-link'" +
+                    " href='javascript:creat_query_critera(0,"+i+")'>"+i+"</a>" +
+                    "</li>";
+            }
+            if(last_query_condition[0] == parseInt(ret.Success.page_num))
+                pagination += "<li class='page-item disabled'>";
+            else
+                pagination += "<li class='page-item'>";
+            pagination += "<a class='page-link page-next' href='javascript:creat_query_critera(0,"+(last_query_condition[0]+1)+
+                ")' aria-label='Next'>" +
+                "<span aria-hidden='true'>&raquo;</span>" +
+                "<span class='sr-only'>Next</span>" +
+                "</a>" +
+                "</li></ul>"
+            oStatus.prepend(pagination);
+        }
+    ];
+
+    function submit_query_criteria_status(goal, query_condition, url, index){
+        var len = $(goal).children('thead').children('tr').children('th').length;//获取表格的列数，用来合并单元格，来显示等待加载动画
+        goal = $(goal).children('tbody');//找到表格的body部分，这里是为了简写，不然写起来太长了
+        $.ajax({
+            type:'get',
+            url:url+query_condition,
+            beforeSend: function(){
+                /*
+                * 本函数是在请求之前执行
+                * 将表格内容部分设置为正在等待加载
+                * */
+                if(index <= 1 || last_table == show_table) return;/*由于前面两个的内容部分不用全部加载，所以设置一个返回*/
+				last_table = show_table;
+                $(goal[0]).html("<tr style='width: 100%;height: 100px;'><td colspan="+
+                    len+"><div class='Unlink-error'>"+
+                    "<img src='{% static 'image/waite.png' %}' alt='' class='Waiting'>" +
+                    "</div></td></tr>");
+            },
+            success: function(ret){
+                /*
+                * 本函数为，数据请求成功之后执行
+                * 如果数据请求成功，并且没有错误信息，便在表格内容部分中将信息添加进去
+                * */
+                ret = eval("("+ret+")");/*解析json数据包*/
+                if(ret.Error){
+                    /*
+                    * 如果有错误信息
+                    * 便将错误信息打印出来
+                    * */
+                    $(goal[0]).html("<tr style='width: 100%;height: 100px;'><td colspan="+
+                        len+" style='height: 100px;'><div class='Unlink-error'>" +
+                        "<img src='{% static 'image/Unlink.png' %}' alt=''>" +
+                        ret.Error.content /*这里是数据传过来的错误信息*/ +
+                        "</div></td></tr>");
+                }
+                else{
+                    contest_Farr[index](goal, ret);/*调用对应的响应函数来执行数据打印*/
+                }
+            },
+            error: function(ret){
+                $(goal).html("<tr style='width: 100%;height: 100px;'><td colspan="+
+                    len+"><div class='Unlink-error'>" +
+                    "<img src='{% static 'image/Unlink.png' %}' alt=''>Link failure</div></td></tr>");
+            }
+        });
+    }
+    function parseDate(date) {
+        var y = date.getFullYear();
+        var m = date.getMonth() + 1;
+        m = m < 10 ? ('0' + m) : m;
+        var d = date.getDate();
+        d = d < 10 ? ('0' + d) : d;
+        var h = date.getHours();
+        var minute = date.getMinutes();
+        minute = minute < 10 ? ('0' + minute) : minute;
+        var second= date.getSeconds();
+        second = second < 10 ? ('0' + second) : second;
+        return y + '-' + m + '-' + d+' '+h+':'+minute+':'+ second;
+    }
+    $(function(){
+        (function(){
+            var progress = $(".progress-bar");
+            var length = {{length}};
+            var t = {
+                year:parseInt("{{startTime.year}}"),
+                month:parseInt("{{startTime.month}}"),
+                day:parseInt("{{startTime.day}}"),
+                hour:parseInt("{{startTime.hour}}"),
+                minute:parseInt("{{startTime.minute}}"),
+            };
+            var startTime = new Date(t.year , t.month - 1 , t.day , t.hour , t.minute);
+            var now_time = new Date();
+            var _al = now_time.getTime() - startTime.getTime();
+            /* 比赛未开始时的倒计时 */
+            if(_al < 0){
+                $('.start-time').text(parseDate(startTime));
+                var end_time = new Date(startTime.getTime() + length*60000);
+                $('.end-time').text(parseDate(end_time))
+                var StartTime = startTime.getTime();
+                var timer2 = setInterval(function(){
+                    now_time = new Date();
+                    var seconds = Math.floor((StartTime - now_time.getTime())/1000);
+                    var days = Math.floor(seconds / (60 * 60 * 24));
+                    seconds -= days * 60 * 60 * 24;
+                    var hours = Math.floor(seconds / (60 * 60));
+                    seconds -= hours * 60 * 60;
+                    var minutes = Math.floor(seconds / 60);
+                    seconds -= minutes * 60;
+                    $(".days").text(days);
+                    $(".hours").text(hours);
+                    $(".minutes").text(minutes);
+                    $(".seconds").text(seconds);
+                    if (days <= 1) { $(".timeRefDays").text("day"); } else { $(".timeRefDays").text("days"); }
+                    if (hours <= 1) { $(".timeRefHours").text("hour"); } else { $(".timeRefHours").text("hours"); }
+                    if (minutes <= 1) { $(".timeRefMinutes").text("minute"); } else { $(".timeRefMinutes").text("minutes"); }
+                    if (seconds <= 1) { $(".timeRefSeconds").text("second"); } else { $(".timeRefSeconds").text("seconds"); }
+                    if(now_time.getTime() > StartTime){
+                        clearInterval(timer2);
+                        window.location.reload()
+                    }
+                }, 1000);
+            }
+
+            else{
+                {% if is_start %}
+                var _pross = (_al/(length*60000))*100;
+                if(_pross >= 0){
+                    var end_time = new Date(startTime.getTime() + length*60000);
+                    $('#end_time').text(parseDate(end_time));
+                    var now_timer = setInterval(function (){
+                        now_time = new Date();
+                        $('#now_time').text(parseDate(now_time));
+                        if(parseDate(now_time) > parseDate(end_time)){
+                            $('#now_time').text('over');
+                            clearInterval(now_timer);
+                        }
+                    } , 1000);
+                    if(_pross > 100) _pross = 100;
+                    progress.css('width',_pross + "%");
+                    progress.attr('aria-valuenow' , _pross + "");
+                    if(_pross >= 0 && _pross <= 45) progress.removeClass('bg-warning bg-danger').addClass('bg-success');
+                    else if(_pross > 45 && _pross <= 75)progress.removeClass('bg-success bg-danger').addClass('bg-warning');
+                    else if(_pross > 75 && _pross <= 100)progress.removeClass('bg-success bg-warning').addClass('bg-danger');
+                    if(_pross <= 100) {
+                        var timer = setInterval(function () {
+                            progress.css('width', _pross + "%");
+                            if (_pross == 100) clearInterval(timer);
+                            _pross += 1;
+                            if (_pross >= 0 && _pross <= 45) progress.removeClass('bg-warning bg-danger').addClass('bg-success');
+                            else if (_pross > 45 && _pross <= 75) progress.removeClass('bg-success bg-danger').addClass('bg-warning');
+                            else if (_pross > 75 && _pross <= 100) progress.removeClass('bg-success bg-warning').addClass('bg-danger');
+                            if (_pross < 0) _pross = 0;
+                            else if (_pross >= 100) {
+                                _pross = 100;
+                            }
+                        }, length * 0.01 * 60000);
+                    }
+                }
+                {% endif %}
+            }
+        })();
+		{% if is_start %}
+        (function(){
+            var contestnav_s = $(".contest_nav>li");
+            var content = $(".contest_content");
+            content.hide();
+            $(window.location.hash).show();
+            contestnav_s.click(function(){
+                if($(this).children().hasClass("active")) return false;
+                else {
+                    /*
+                    * 设置点击事件
+                    * */
+                    var i = $(this).index();
+                    clearInterval(rank_status_timer);
+                    if(i != 0){
+                    	show_table = i;
+						//rank_status_timer = setInterval("submit_query_criteria_status($('.table')[show_table - 1], '', _url[show_table], show_table)", 5000);
+					}
+                    $(this).children().addClass("active");
+                    $(this).siblings().children().removeClass("active");
+                    $(content[i]).show().siblings('.contest_content').hide();
+                    if (i != 0) {
+						/* i-1是因为表格只有三个，而导航栏有4个 */
+                        submit_query_criteria_status($('.table')[i - 1]/*找到对应的表格对象*/, ""/*传入对应的筛选条件*/, _url[i]/*对应url*/, i);
+                    }
+                }
+                window.location.hash = $(this).children().attr('href');
+                return false;
+            });
+			$(contestnav_s[$(window.location.hash).index(".contest_content")]).click();
+            /**/
+            $('.submit-user-name').keypress(function(e){
+                if(e.which == 13)
+                    creat_query_critera(1, $(this).val());
+            });
+            $('.judge-states-menu li').click(function(){
+                creat_query_critera(2, $(this).val());
+            });
+            $('.language-menu li').click(function(){
+                creat_query_critera(3, $(this).text() == 'C++' ? 'Csrc' : $(this).text());
+            });
+            $('.problem-menu li').click(function(){
+                creat_query_critera(4, $(this).val());
+            });
+        })();
+		{% endif %}
+    });
+</script>
+{% endblock %}
+
+{% block content %}
+	<div class = "container">
+		<div class = "container">
+		<div class = "row bg-white p-lg-3 my-3 p-1 rounded">
+			<div class="col-12">
+				<h4 class="font-weight-bold col-10 mx-auto text-center">{{contest_name}}</h4>
+				{% if is_start %}
+				<div class="col-10 mx-auto mt-4 mb-3">
+					<div class="col-12 d-flex justify-content-between">
+						<div><b>now: </b><span id = 'now_time'></span></div>
+						<div><b>end: </b><span id = 'end_time'></span></div>
+					</div>
+					<div class="progress" style="height: 1em;">
+						<div class="progress-bar" role="progressbar" style="width:0%;" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"></div>
+					</div>
+				</div>
+				{% else %}
+				<div class="col-lg-4 mx-auto mt-4 d-flex justify-content-between" style="font-size: 14px;">
+					<span class="start-time"></span>-<span class="end-time"></span>
+				</div>
+				{% endif %}
+			</div>
+			{% if is_start %}
+			<div class="col-12 bg-light justify-content-center my-3">
+				<ul class="col-12 nav nav-tabs contest_nav">
+					<li class="nav-item">
+						<a class="nav-link" href="#Info">比赛说明</a>
+					</li>
+					<li class="nav-item">
+						<a class="nav-link active" href="#Problem">题目</a>
+					</li>
+					<li class="nav-item">
+						<a class="nav-link" href="#Rank">排名</a>
+					</li>
+					<li class="nav-item">
+						<a class="nav-link" href="#Status">提交状态</a>
+					</li>
+				</ul>
+			</div>
+			<div class = "col-md-12 my-3 contest_content" id="Info" width="100%">
+				<h6>多组输入</h6>
+				<p>
+					多组输入请采用下面两种方式
+				</p>
+				<p>
+					C:
+					<pre>
+#include <stdio.h>
+int main() {
+int a, b;
+while (scanf("%d%d", &a, &b) != EOF/*这里输入参数*/) {
+    printf("%d\n", a + b);//你的代码
+}
+return 0;
+}</pre>
+				C++:
+				<pre>
+#include <iostream>
+using namespace std;
+int main() {
+    int a, b;
+    while (cin >> a >> b/*这里输入参数*/) {
+        cout << a + b << endl;//你的代码
+    }
+    return 0;
+}</pre>
+				</p>
+<p>Java:
+
+<pre>
+//前面需要加上相应的头文件
+public class Main{
+	public static void main(String[] args){
+		while(sc.hasNext()){
+			//你的代码, 请不要用while(true) 进行多组输入
+		}
+	}
+}</pre></p>
+			</div>
+			<div class = "col-md-12 my-3 contest_content" id="Problem" width="100%">
+				<table class = "table table-striped table-bordered table-hover">
+					<thead>
+					<tr>
+						<th scope="col">PID</th>
+						<th scope="col">Title</th>
+						<th scope="col">Ratio(Ac/Submit)</th>
+						<th scope="col">Status</th>
+					</tr>
+					</thead>
+					<tbody>
+                    {% for prob in contest_problems %}
+					<tr>
+						<th class = "problem-no" scope="row">{{ forloop.counter0|rank_char }}</th>
+						<td scope="row">
+                            <a class="problem-name"
+							   href = "{% url 'contest:contest_problem_page' contest_id prob.no %}?Problem={{ forloop.counter0|rank_char }}"
+							   target="_blank">
+                                {{ prob.title }}
+                            </a>
+                        </td>
+						<td scope="row" class="Problems_Ratio"></td>
+						<td scope="row" class="Problems_Status"></td>
+					</tr>
+                    {% endfor %}
+					</tbody>
+				</table>
+			</div>
+			<div class = "col-md-12 my-3 contest_content" id="Rank" width="100%">
+				<div class = "mx-1">
+					<table class = "table table-striped table-bordered rank" style="width: auto;border-color: #fff;">
+						<thead>
+						<tr>
+							<th scope="col" style="min-width: 50px;width: 80px;">Rank</th>
+							<th scope="col" style="width: 50px;">User</th>
+							<th scope="col" style="width: 200px;">Nickname</th>
+							<th scope="col" style="min-width: 50px;width: 80px;">Score</th>
+							<th scope="col">Penalty</th>
+                            {% for i in contest_problems %}
+							<th scope="col">{{ forloop.counter0|rank_char}}</th>
+                            {% endfor %}
+						</tr>
+						</thead>
+						<tbody>
+						</tbody>
+					</table>
+				</div>
+			</div>
+			<div class = "col-md-12 my-3 contest_content" id="Status" width="100%">
+				<div class="input-group mb-2 col-lg-4 col-md-5">
+					<input type="text" class="form-control submit-user-name" placeholder="ID/name">
+					<div class="input-group-prepend">
+						<div class="input-group-text"><i class="fas fa-search"></i></div>
+					</div>
+				</div>
+				<div class = "table-box status">
+					<table class = "table table-striped table-bordered">
+						<thead>
+						<tr>
+							<th scope="col">RunID</th>
+							<th scope="col">
+								<div class="dropdown" style="cursor: pointer;">
+									<div class="dropdown-toggle" data-toggle="dropdown">Problem</div>
+									<div class="dropdown-menu problem-menu">
+                                        <li class="dropdown-item" value="0">All</li>
+                                        {% for i in contest_problems %}
+                                        <li class="dropdown-item" value="{{ i.no }}">{{ forloop.counter0|rank_char}}</li>
+                                        {% endfor %}
+									</div>
+								</div>
+							</th>
+							<th scope="col">
+								<div class="dropdown" style="cursor: pointer;">
+
+									<div class="dropdown-toggle" data-toggle="dropdown">Judge States</div>
+									<div class="dropdown-menu judge-states-menu" style="z-index: 1050;" >
+                                        <li class="dropdown-item" style="color:green" value="0" >All</li>
+                                        <li class="dropdown-item" style="color:green" value="1" >Accepted</li>
+                                        <li class="dropdown-item" style="color:orange" value="2">Presentation Error</li>
+                                        <li class="dropdown-item" style="color:red" value="3" >Wrong Answer</li>
+                                        <li class="dropdown-item" style="color:purple" value="4">Time Limit Exceeded</li>
+                                        <li class="dropdown-item" style="color:purple" value="5">Memory Limit Exceeded</li>
+                                        <li class="dropdown-item" style="color:purple" value="6">Output Limit Exceeded</li>
+                                        <li class="dropdown-item" style="color:orange" value="7">Runtime Error</li>
+                                        <li class="dropdown-item" style="color:orange" value="8">Compilation Error</li>
+                                        <li class="dropdown-item" style="color:orange" value="9">Compile Output Error</li>
+									</div>
+								</div>
+							</th>
+							<th scope="col">Time</th><th scope="col">Memory</th>
+							<th scope="col">
+								<div class="dropdown">
+									<div class="dropdown" style="cursor: pointer;">
+										<div class="dropdown-toggle" data-toggle="dropdown">Language</div>
+										<div class="dropdown-menu language-menu">
+                                            <li class="dropdown-item" >All</li>
+                                            <li class="dropdown-item" >C</li>
+                                            <li class="dropdown-item" >C++</li>
+                                            <li class="dropdown-item" >Java</li>
+<!--                                            <li class="dropdown-item" >Python</li>-->
+										</div>
+									</div>
+								</div>
+							</th>
+							<th scope="col">Submit Time</th><th scope="col">Author</th>
+						</tr>
+						</thead>
+						<tbody>
+						</tbody>
+					</table>
+				</div>
+			</div>
+			{% else %}
+			<div class="col-md-12 my-5 justify-content-center d-flex flex-column align-items-center">
+									距离比赛开始还有:
+				<div class="col-md-10" style="height: 250px;">
+					<ul id="countdown" class="d-flex justify-content-between align-items-center">
+						<li>
+							<span class="days"></span>
+							<p class="timeRefDays">days</p>
+						</li>
+						<li>
+							<span class="hours"></span>
+							<p class="timeRefHours">hours</p>
+						</li>
+						<li>
+							<span class="minutes"></span>
+							<p class="timeRefMinutes">minutes</p>
+						</li>
+						<li>
+							<span class="seconds"></span>
+							<p class="timeRefSeconds">seconds</p>
+						</li>
+					</ul>
+				</div>
+			</div>
+			{% endif %}
+		</div>
+	</div>
+
+{% endblock %}
+

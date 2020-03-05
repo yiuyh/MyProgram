@@ -1,0 +1,137 @@
+H:\vs2015 codes\书店管理系统\书店管理系统\bin\Debug\书店管理系统.exe.config
+H:\vs2015 codes\书店管理系统\书店管理系统\bin\Debug\书店管理系统.exe
+H:\vs2015 codes\书店管理系统\书店管理系统\bin\Debug\书店管理系统.pdb
+H:\vs2015 codes\书店管理系统\书店管理系统\obj\Debug\书店管理系统.csprojResolveAssemblyReference.cache
+H:\vs2015 codes\书店管理系统\书店管理系统\obj\Debug\书店管理系统.Properties.Resources.resources
+H:\vs2015 codes\书店管理系统\书店管理系统\obj\Debug\书店管理系统.csproj.GenerateResource.Cache
+H:\vs2015 codes\书店管理系统\书店管理系统\obj\Debug\书店管理系统.exe
+H:\vs2015 codes\书店管理系统\书店管理系统\obj\Debug\书店管理系统.pdb
+H:\vs2015 codes\书店管理系统\书店管理系统\obj\Debug\书店管理系统.CusInfo.resources
+H:\vs2015 codes\书店管理系统\书店管理系统\obj\Debug\书店管理系统.CusView.resources
+H:\vs2015 codes\书店管理系统\书店管理系统\obj\Debug\书店管理系统.Main.resources
+H:\vs2015 codes\书店管理系统\书店管理系统\obj\Debug\书店管理系统.Register.resources
+H:\vs2015 codes\书店管理系统\书店管理系统\obj\Debug\书店管理系统.Login.resources
+H:\vs2015 codes\书店管理系统\书店管理系统\obj\Debug\书店管理系统.ShoppingCar.resources
+H:\vs2015 codes\书店管理系统\书店管理系统\obj\Debug\书店管理系统.CusOrder.resources
+H:\vs2015 codes\书店管理系统\书店管理系统\obj\Debug\书店管理系统.OrderDetail.resources
+H:\vs2015 codes\书店管理系统\书店管理系统\obj\Debug\书店管理系统.Manager.resources
+H:\vs2015 codes\书店管理系统\书店管理系统\obj\Debug\书店管理系统.ManagerInfo.resources
+H:\vs2015 codes\书店管理系统\书店管理系统\obj\Debug\书店管理系统.BookAdd.resources
+F:\作业+实验报告\大三\大三上数据库\书店管理系统\书店管理系统\书店管理系统\bin\Debug\书店管理系统.exe.config
+F:\作业+实验报告\大三\大三上数据库\书店管理系统\书店管理系统\书店管理系统\obj\Debug\书店管理系统.exe
+F:\作业+实验报告\大三\大三上数据库\书店管理系统\书店管理系统\书店管理系统\obj\Debug\书店管理系统.pdb
+F:\作业+实验报告\大三\大三上数据库\书店管理系统\书店管理系统\书店管理系统\bin\Debug\书店管理系统.exe
+F:\作业+实验报告\大三\大三上数据库\书店管理系统\书店管理系统\书店管理系统\bin\Debug\书店管理系统.pdb
+F:\作业+实验报告\大三\大三上数据库\书店管理系统\书店管理系统\书店管理系统\obj\Debug\书店管理系统.csprojResolveAssemblyReference.cache
+F:\作业+实验报告\大三\大三上数据库\书店管理系统\书店管理系统\书店管理系统\obj\Debug\书店管理系统.BookAdd.resources
+F:\作业+实验报告\大三\大三上数据库\书店管理系统\书店管理系统\书店管理系统\obj\Debug\书店管理系统.CusInfo.resources
+F:\作业+实验报告\大三\大三上数据库\书店管理系统\书店管理系统\书店管理系统\obj\Debug\书店管理系统.CusOrder.resources
+F:\作业+实验报告\大三\大三上数据库\书店管理系统\书店管理系统\书店管理系统\obj\Debug\书店管理系统.CusView.resources
+F:\作业+实验报告\大三\大三上数据库\书店管理系统\书店管理系统\书店管理系统\obj\Debug\书店管理系统.Main.resources
+F:\作业+实验报告\大三\大三上数据库\书店管理系统\书店管理系统\书店管理系统\obj\Debug\书店管理系统.Manager.resources
+F:\作业+实验报告\大三\大三上数据库\书店管理系统\书店管理系统\书店管理系统\obj\Debug\书店管理系统.ManagerInfo.resources
+F:\作业+实验报告\大三\大三上数据库\书店管理系统\书店管理系统\书店管理系统\obj\Debug\书店管理系统.OrderDetail.resources
+F:\作业+实验报告\大三\大三上数据库\书店管理系统\书店管理系统\书店管理系统\obj\Debug\书店管理系统.Register.resources
+F:\作业+实验报告\大三\大三上数据库\书店管理系统\书店管理系统\书店管理系统\obj\Debug\书店管理系统.Login.resources
+F:\作业+实验报告\大三\大三上数据库\书店管理系统\书店管理系统\书店管理系统\obj\Debug\书店管理系统.Properties.Resources.resources
+F:\作业+实验报告\大三\大三上数据库\书店管理系统\书店管理系统\书店管理系统\obj\Debug\书店管理系统.ShoppingCar.resources
+F:\作业+实验报告\大三\大三上数据库\书店管理系统\书店管理系统\书店管理系统\obj\Debug\书店管理系统.csproj.GenerateResource.Cache
+C:\Users\Administrator\Desktop\大三上\数据库\书店管理系统\书店管理系统\书店管理系统\bin\Debug\书店管理系统.exe.config
+C:\Users\Administrator\Desktop\大三上\数据库\书店管理系统\书店管理系统\书店管理系统\obj\Debug\书店管理系统.exe
+C:\Users\Administrator\Desktop\大三上\数据库\书店管理系统\书店管理系统\书店管理系统\obj\Debug\书店管理系统.pdb
+C:\Users\Administrator\Desktop\大三上\数据库\书店管理系统\书店管理系统\书店管理系统\bin\Debug\书店管理系统.exe
+C:\Users\Administrator\Desktop\大三上\数据库\书店管理系统\书店管理系统\书店管理系统\bin\Debug\书店管理系统.pdb
+C:\Users\Administrator\Desktop\大三上\数据库\书店管理系统\书店管理系统\书店管理系统\obj\Debug\书店管理系统.csprojResolveAssemblyReference.cache
+C:\Users\Administrator\Desktop\大三上\数据库\书店管理系统\书店管理系统\书店管理系统\obj\Debug\书店管理系统.BookAdd.resources
+C:\Users\Administrator\Desktop\大三上\数据库\书店管理系统\书店管理系统\书店管理系统\obj\Debug\书店管理系统.CusInfo.resources
+C:\Users\Administrator\Desktop\大三上\数据库\书店管理系统\书店管理系统\书店管理系统\obj\Debug\书店管理系统.CusOrder.resources
+C:\Users\Administrator\Desktop\大三上\数据库\书店管理系统\书店管理系统\书店管理系统\obj\Debug\书店管理系统.CusView.resources
+C:\Users\Administrator\Desktop\大三上\数据库\书店管理系统\书店管理系统\书店管理系统\obj\Debug\书店管理系统.Main.resources
+C:\Users\Administrator\Desktop\大三上\数据库\书店管理系统\书店管理系统\书店管理系统\obj\Debug\书店管理系统.Manager.resources
+C:\Users\Administrator\Desktop\大三上\数据库\书店管理系统\书店管理系统\书店管理系统\obj\Debug\书店管理系统.ManagerInfo.resources
+C:\Users\Administrator\Desktop\大三上\数据库\书店管理系统\书店管理系统\书店管理系统\obj\Debug\书店管理系统.OrderDetail.resources
+C:\Users\Administrator\Desktop\大三上\数据库\书店管理系统\书店管理系统\书店管理系统\obj\Debug\书店管理系统.Register.resources
+C:\Users\Administrator\Desktop\大三上\数据库\书店管理系统\书店管理系统\书店管理系统\obj\Debug\书店管理系统.Login.resources
+C:\Users\Administrator\Desktop\大三上\数据库\书店管理系统\书店管理系统\书店管理系统\obj\Debug\书店管理系统.Properties.Resources.resources
+C:\Users\Administrator\Desktop\大三上\数据库\书店管理系统\书店管理系统\书店管理系统\obj\Debug\书店管理系统.ShoppingCar.resources
+C:\Users\Administrator\Desktop\大三上\数据库\书店管理系统\书店管理系统\书店管理系统\obj\Debug\书店管理系统.csproj.GenerateResource.Cache
+C:\Users\Administrator\Desktop\大三上\数据库\bk\书店管理系统\书店管理系统\bin\Debug\书店管理系统.exe.config
+C:\Users\Administrator\Desktop\大三上\数据库\bk\书店管理系统\书店管理系统\obj\Debug\书店管理系统.exe
+C:\Users\Administrator\Desktop\大三上\数据库\bk\书店管理系统\书店管理系统\obj\Debug\书店管理系统.pdb
+C:\Users\Administrator\Desktop\大三上\数据库\bs\书店管理系统\书店管理系统\bin\Debug\书店管理系统.exe.config
+C:\Users\Administrator\Desktop\大三上\数据库\bs\书店管理系统\书店管理系统\obj\Debug\书店管理系统.exe
+C:\Users\Administrator\Desktop\大三上\数据库\bs\书店管理系统\书店管理系统\obj\Debug\书店管理系统.pdb
+C:\Users\Administrator\Desktop\大三上\数据库\bs\书店管理系统\书店管理系统\bin\Debug\书店管理系统.exe
+C:\Users\Administrator\Desktop\大三上\数据库\bs\书店管理系统\书店管理系统\bin\Debug\书店管理系统.pdb
+C:\Users\Administrator\Desktop\大三上\数据库\bs\书店管理系统\书店管理系统\obj\Debug\书店管理系统.csprojResolveAssemblyReference.cache
+C:\Users\Administrator\Desktop\大三上\数据库\bs\书店管理系统\书店管理系统\obj\Debug\书店管理系统.BookAdd.resources
+C:\Users\Administrator\Desktop\大三上\数据库\bs\书店管理系统\书店管理系统\obj\Debug\书店管理系统.CusInfo.resources
+C:\Users\Administrator\Desktop\大三上\数据库\bs\书店管理系统\书店管理系统\obj\Debug\书店管理系统.CusOrder.resources
+C:\Users\Administrator\Desktop\大三上\数据库\bs\书店管理系统\书店管理系统\obj\Debug\书店管理系统.CusView.resources
+C:\Users\Administrator\Desktop\大三上\数据库\bs\书店管理系统\书店管理系统\obj\Debug\书店管理系统.Main.resources
+C:\Users\Administrator\Desktop\大三上\数据库\bs\书店管理系统\书店管理系统\obj\Debug\书店管理系统.Manager.resources
+C:\Users\Administrator\Desktop\大三上\数据库\bs\书店管理系统\书店管理系统\obj\Debug\书店管理系统.ManagerInfo.resources
+C:\Users\Administrator\Desktop\大三上\数据库\bs\书店管理系统\书店管理系统\obj\Debug\书店管理系统.Register.resources
+C:\Users\Administrator\Desktop\大三上\数据库\bs\书店管理系统\书店管理系统\obj\Debug\书店管理系统.Login.resources
+C:\Users\Administrator\Desktop\大三上\数据库\bs\书店管理系统\书店管理系统\obj\Debug\书店管理系统.Properties.Resources.resources
+C:\Users\Administrator\Desktop\大三上\数据库\bs\书店管理系统\书店管理系统\obj\Debug\书店管理系统.ShoppingCar.resources
+C:\Users\Administrator\Desktop\大三上\数据库\bs\书店管理系统\书店管理系统\obj\Debug\书店管理系统.csproj.GenerateResource.Cache
+C:\Users\Administrator\Desktop\大三上\数据库\bs\书店管理系统\书店管理系统\obj\Debug\书店管理系统.SupporDetail.resources
+C:\Users\14714\Documents\Tencent Files\1471427006\FileRecv\书店管理系统\书店管理系统\bin\Debug\书店管理系统.exe.config
+C:\Users\14714\Documents\Tencent Files\1471427006\FileRecv\书店管理系统\书店管理系统\obj\Debug\书店管理系统.exe
+C:\Users\14714\Documents\Tencent Files\1471427006\FileRecv\书店管理系统\书店管理系统\obj\Debug\书店管理系统.pdb
+C:\Users\14714\Documents\Tencent Files\1471427006\FileRecv\书店管理系统\书店管理系统\bin\Debug\书店管理系统.exe
+C:\Users\14714\Documents\Tencent Files\1471427006\FileRecv\书店管理系统\书店管理系统\bin\Debug\书店管理系统.pdb
+C:\Users\14714\Documents\Tencent Files\1471427006\FileRecv\书店管理系统\书店管理系统\obj\Debug\书店管理系统.csprojResolveAssemblyReference.cache
+C:\Users\14714\Documents\Tencent Files\1471427006\FileRecv\书店管理系统\书店管理系统\obj\Debug\书店管理系统.BookAdd.resources
+C:\Users\14714\Documents\Tencent Files\1471427006\FileRecv\书店管理系统\书店管理系统\obj\Debug\书店管理系统.CusInfo.resources
+C:\Users\14714\Documents\Tencent Files\1471427006\FileRecv\书店管理系统\书店管理系统\obj\Debug\书店管理系统.CusOrder.resources
+C:\Users\14714\Documents\Tencent Files\1471427006\FileRecv\书店管理系统\书店管理系统\obj\Debug\书店管理系统.CusView.resources
+C:\Users\14714\Documents\Tencent Files\1471427006\FileRecv\书店管理系统\书店管理系统\obj\Debug\书店管理系统.Main.resources
+C:\Users\14714\Documents\Tencent Files\1471427006\FileRecv\书店管理系统\书店管理系统\obj\Debug\书店管理系统.Manager.resources
+C:\Users\14714\Documents\Tencent Files\1471427006\FileRecv\书店管理系统\书店管理系统\obj\Debug\书店管理系统.ManagerInfo.resources
+C:\Users\14714\Documents\Tencent Files\1471427006\FileRecv\书店管理系统\书店管理系统\obj\Debug\书店管理系统.SupporDetail.resources
+C:\Users\14714\Documents\Tencent Files\1471427006\FileRecv\书店管理系统\书店管理系统\obj\Debug\书店管理系统.Register.resources
+C:\Users\14714\Documents\Tencent Files\1471427006\FileRecv\书店管理系统\书店管理系统\obj\Debug\书店管理系统.Login.resources
+C:\Users\14714\Documents\Tencent Files\1471427006\FileRecv\书店管理系统\书店管理系统\obj\Debug\书店管理系统.Properties.Resources.resources
+C:\Users\14714\Documents\Tencent Files\1471427006\FileRecv\书店管理系统\书店管理系统\obj\Debug\书店管理系统.csproj.GenerateResource.Cache
+C:\Users\14714\Documents\Tencent Files\1471427006\FileRecv\书店管理系统\书店管理系统\bin\Debug\CSkin.dll
+C:\Users\14714\Documents\Tencent Files\1471427006\FileRecv\书店管理系统\书店管理系统\bin\Debug\CSkin.xml
+C:\Users\Administrator\Desktop\大三上\数据库\bs\新建文件夹\书店管理系统\bin\Debug\书店管理系统.exe.config
+C:\Users\Administrator\Desktop\大三上\数据库\bs\新建文件夹\书店管理系统\obj\Debug\书店管理系统.exe
+C:\Users\Administrator\Desktop\大三上\数据库\bs\新建文件夹\书店管理系统\obj\Debug\书店管理系统.pdb
+C:\Users\Administrator\Desktop\大三上\数据库\bs\新建文件夹\书店管理系统\bin\Debug\书店管理系统.exe
+C:\Users\Administrator\Desktop\大三上\数据库\bs\新建文件夹\书店管理系统\bin\Debug\书店管理系统.pdb
+C:\Users\Administrator\Desktop\大三上\数据库\bs\新建文件夹\书店管理系统\bin\Debug\CSkin.xml
+C:\Users\Administrator\Desktop\大三上\数据库\bs\新建文件夹\书店管理系统\obj\Debug\书店管理系统.csprojResolveAssemblyReference.cache
+C:\Users\Administrator\Desktop\大三上\数据库\bs\新建文件夹\书店管理系统\obj\Debug\书店管理系统.BookAdd.resources
+C:\Users\Administrator\Desktop\大三上\数据库\bs\新建文件夹\书店管理系统\obj\Debug\书店管理系统.CusInfo.resources
+C:\Users\Administrator\Desktop\大三上\数据库\bs\新建文件夹\书店管理系统\obj\Debug\书店管理系统.CusOrder.resources
+C:\Users\Administrator\Desktop\大三上\数据库\bs\新建文件夹\书店管理系统\obj\Debug\书店管理系统.CusView.resources
+C:\Users\Administrator\Desktop\大三上\数据库\bs\新建文件夹\书店管理系统\obj\Debug\书店管理系统.Main.resources
+C:\Users\Administrator\Desktop\大三上\数据库\bs\新建文件夹\书店管理系统\obj\Debug\书店管理系统.Manager.resources
+C:\Users\Administrator\Desktop\大三上\数据库\bs\新建文件夹\书店管理系统\obj\Debug\书店管理系统.ManagerInfo.resources
+C:\Users\Administrator\Desktop\大三上\数据库\bs\新建文件夹\书店管理系统\obj\Debug\书店管理系统.SupporDetail.resources
+C:\Users\Administrator\Desktop\大三上\数据库\bs\新建文件夹\书店管理系统\obj\Debug\书店管理系统.Register.resources
+C:\Users\Administrator\Desktop\大三上\数据库\bs\新建文件夹\书店管理系统\obj\Debug\书店管理系统.Login.resources
+C:\Users\Administrator\Desktop\大三上\数据库\bs\新建文件夹\书店管理系统\obj\Debug\书店管理系统.Properties.Resources.resources
+C:\Users\Administrator\Desktop\大三上\数据库\bs\新建文件夹\书店管理系统\obj\Debug\书店管理系统.csproj.GenerateResource.Cache
+C:\Users\Administrator\Desktop\图书管理系统\图书管理系统\书店管理系统\bin\Debug\书店管理系统.exe.config
+C:\Users\Administrator\Desktop\图书管理系统\图书管理系统\书店管理系统\obj\Debug\书店管理系统.exe
+C:\Users\Administrator\Desktop\图书管理系统\图书管理系统\书店管理系统\obj\Debug\书店管理系统.pdb
+C:\Users\Administrator\Desktop\图书管理系统\图书管理系统\书店管理系统\bin\Debug\书店管理系统.exe
+C:\Users\Administrator\Desktop\图书管理系统\图书管理系统\书店管理系统\bin\Debug\书店管理系统.pdb
+C:\Users\Administrator\Desktop\图书管理系统\图书管理系统\书店管理系统\bin\Debug\CSkin.xml
+C:\Users\Administrator\Desktop\图书管理系统\图书管理系统\书店管理系统\obj\Debug\书店管理系统.csprojResolveAssemblyReference.cache
+C:\Users\Administrator\Desktop\图书管理系统\图书管理系统\书店管理系统\obj\Debug\书店管理系统.BookAdd.resources
+C:\Users\Administrator\Desktop\图书管理系统\图书管理系统\书店管理系统\obj\Debug\书店管理系统.CusInfo.resources
+C:\Users\Administrator\Desktop\图书管理系统\图书管理系统\书店管理系统\obj\Debug\书店管理系统.CusOrder.resources
+C:\Users\Administrator\Desktop\图书管理系统\图书管理系统\书店管理系统\obj\Debug\书店管理系统.CusView.resources
+C:\Users\Administrator\Desktop\图书管理系统\图书管理系统\书店管理系统\obj\Debug\书店管理系统.Main.resources
+C:\Users\Administrator\Desktop\图书管理系统\图书管理系统\书店管理系统\obj\Debug\书店管理系统.Manager.resources
+C:\Users\Administrator\Desktop\图书管理系统\图书管理系统\书店管理系统\obj\Debug\书店管理系统.ManagerInfo.resources
+C:\Users\Administrator\Desktop\图书管理系统\图书管理系统\书店管理系统\obj\Debug\书店管理系统.SupporDetail.resources
+C:\Users\Administrator\Desktop\图书管理系统\图书管理系统\书店管理系统\obj\Debug\书店管理系统.Register.resources
+C:\Users\Administrator\Desktop\图书管理系统\图书管理系统\书店管理系统\obj\Debug\书店管理系统.Login.resources
+C:\Users\Administrator\Desktop\图书管理系统\图书管理系统\书店管理系统\obj\Debug\书店管理系统.Properties.Resources.resources
+C:\Users\Administrator\Desktop\图书管理系统\图书管理系统\书店管理系统\obj\Debug\书店管理系统.csproj.GenerateResource.Cache
